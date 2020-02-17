@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0,minimal-ui:ios">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="">
+    <script>
+
+
+        window.onload = function () {
+
+            var sum = function (n) {
+                if (1 == n) return 1;
+                else return n + arguments.callee(n - 1);
+            }
+            alert(sum(3));
+            return
+            Array.prototype.mysort = function (fn) {
+                let arr2 = []
+                arr2.push(this[0]);
+                for (let i = 1; i < this.length; i++) {
+
+                    if (fn(this[i - 1], this[i]) > 0) {
+                        arr2.unshift(this[i])
+                    }
+                    else {
+                        arr2.push(this[i]);
+                    }
+                }
+                return arr2;
+            }
+            var arr11 = [1, 2, 3, 4];
+            var arr31 = arr11.mysort((a, b) => { return b - a });
+
+            console.log(arr31) // [4,3,2,1]
+
+            return
+            var btn1 = document.getElementById("divArea");
+            btn1.addEventListener("click", function () {
+                alert('divArea')
+            }, false);
+
+
+
+
+            return
+            var studentsData =
+                [{ name: "loren", age: 17 },
+                { name: "mike", age: 16 },
+                { name: "frank", age: 18 }];
+
+
+            function compareFunctionByName(obj1, obj2) {
+
+                if (obj1.name > obj2.name) {
+                    return -1
+                } else {
+                    return 1
+                }
+
+            };
+
+            function compareFunctionByAge(obj1, obj2) {
+                if (obj1.age > obj2.age) {
+                    return -1
+                } else {
+                    return 1
+                }
+            };
+
+            // studentsData.toString = () =>{
+            //     for(let i=0;i<this.length;i++){
+            //         this[i]
+            //     }
+            // }
+            console.log(JSON.stringify(studentsData.sort(compareFunctionByName)))
+            console.log(JSON.stringify(studentsData.sort(compareFunctionByAge)))
+            // studentsData.sort(compareFunctionByName)
+
+
+            // console.log(compareFunctionByAge(studentsData));
+            function createCompareFunction(field) {
+                return function (obj1, obj2) {
+                    if (obj1[field] > obj2[field]) {
+                        return -1
+                    } else {
+                        return 1
+                    }
+                };
+            }
+
+
+            console.log(JSON.stringify(studentsData.sort(createCompareFunction("name"))))
+
+            console.log(JSON.stringify(studentsData.sort(createCompareFunction("age"))))
+
+            return
+
+
+
+            // var appendDiv = function (callback) {
+            //     for (var i = 0; i < 10000; i++) {
+            //         var div1 = document.createElement('div');
+            //         console.log(div1);
+            //         div1.innerHTML = i;
+
+            //         var oDivContainer = document.getElementById('divContainer')
+            //         // document.body.appendChild(div1);
+            //         // (document.body.appendChild(div1)
+            //         oDivContainer.appendChild(div1)
+            //         if (typeof callback === 'function') {
+            //             callback(div1);
+            //         }
+            //     }
+            // }
+
+            // appendDiv(function (node) {
+            //     node.style.display = 'block';
+            // })
+
+
+            Array.prototype.mysort = function (fn) {
+                let arr2 = []
+                arr2.push(this[0]);
+                for (let i = 1; i < arr1.length; i++) {
+
+                    if (fn(this[i - 1], this[i])) {
+                        arr2.unshift(this[i])
+                    }
+                    else {
+                        arr2.push(this[i]);
+                    }
+                }
+                return arr2;
+            }
+
+            Array.prototype.mymap = function (fn) {
+                let arr2 = []
+                for (let i = 0; i < arr1.length; i++) {
+                    arr2.push(fn(this[i]));
+                }
+                return arr2;
+            }
+
+
+
+            const arr1 = [1, 2, 3, 4];
+            var arr2 = arr1.mymap((a) => { return a * 2 });
+            var arr3 = arr1.mysort((a, b) => { return b - a });
+
+
+            console.log(arr2)
+            console.log(arr3)
+
+            // appendDiv()
+        }
+
+
+    </script>
+
+
+</head>
+
+<body>
+    <div id="divArea" style="width: 200px;height: 200px;background-color: aqua;">
+    </div>
+</body>
+
+</html>

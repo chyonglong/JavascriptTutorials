@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0,minimal-ui:ios">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="">
+    <script>
+        function foo1() {
+            var a = 2;
+            function bar1() {
+                console.log(a); // 2
+            }
+            bar1();
+        }
+        foo1();
+
+
+        var bar
+        function foo2() {
+            var a = 2;
+            function bar2() {
+                console.log(a); // 2
+            }
+            bar = bar2;
+        }
+        foo2();
+        bar()
+
+
+
+        var myDoListOperation
+        function myDoList() {
+
+            var doList = []
+            function addTask(task) {
+                let index = doList.indexOf(task)
+                if (index == -1) {
+                    doList.push(task)
+                    console.log("doList:", doList)
+                }
+                else {
+                    console.log("doList:", doList, " 已经存在 ", task)
+                }
+            }
+            function finishTask(task) {
+                let index = doList.indexOf(task)
+                if (index == -1) {
+                    console.log("doList:", doList, " 不存在 ", task)
+                }
+                else {
+                    doList.splice(index, 1);
+                    console.log("doList:", doList)
+                }
+
+
+            }
+
+            myDoListOperation = {
+                addTask: addTask,
+                finishTask: finishTask,
+            TT
+        }
+        myDoList()
+        op1.sum()
+        op1.sub()
+
+        // function createFunctions() {
+        //     var result = new Array();
+        //     for (var i = 0; i < 10; i++) {
+        //         result[i] = function () {
+        //             return i;
+        //         };
+        //     }
+        //     return result;
+        // }
+        // let result = createFunctions();
+        // result[1]();
+
+        // (function () {
+        //     function createComparisonFunction(propertyName) {
+        //         return function (object1, object2) {
+        //             debugger
+        //             var value1 = object1[propertyName];
+        //             var value2 = object2[propertyName];
+        //             if (value1 < value2) {
+        //                 return -1;
+        //             } else if (value1 > value2) {
+        //                 return 1;
+        //             } else {
+        //                 return 0;
+        //             }
+        //         };
+        //     }
+        //     var compare = createComparisonFunction("name");
+        //     var result = compare({ name: "Nicholas" }, { name: "Greg" });
+        // })()
+
+        // function f1() {
+        //     var fn
+        //     var v1 = 1
+        //     function f2() {
+        //         var v2 = 2
+        //         console.log(v1, v2)
+        //         debugger
+        //         function f3() {
+        //             var v3 = 3
+        //             console.log(v1, v3)
+
+        //             function f4() {
+        //                 debugger
+        //                 var v4 = 4
+        //                 console.log(v1, v3)
+
+        //             }
+        //             fn = f4
+        //         }
+        //         f3()
+        //     }
+        //     f2()
+
+        //     fn()
+        // }
+        // f1()
+
+
+// 被调用的函数，只要在该函数中有使用上层函数的变量，那上层的函数就为闭包
+
+
+
+    </script>
+
+
+</head>
+
+<body>
+
+</body>
+
+</html>

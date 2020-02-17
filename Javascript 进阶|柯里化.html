@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0,minimal-ui:ios">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="">
+    <script>
+
+        var obj = {}
+        obj.toString = () => {
+            return "1"
+        }
+        obj.valueOf = () => {
+            return "2"
+        }
+
+        var str = '123'
+        
+
+        alert(str.concat(obj))
+        alert(obj - 0)
+
+        var add = (function () {
+
+            var args = []
+
+
+            let fn1 = function fn() {
+
+                _fn = fn
+
+                _fn.toString = function () {
+                    return args.reduce(function (a, b) {
+                        return a + b;
+                    });
+                }
+
+                // let fn = function (...arguments) {
+                args.push(...arguments)
+                console.log("args:", args)
+                // }
+
+                // fn.result = function () {
+                //     console.log(args)
+                //     return args;
+                // }
+
+                return _fn
+            }
+
+            return fn1
+
+        })()
+        // debugger
+        let a = add(2)(3)(4);
+
+        console.log(a - 0)
+        console.log(a)
+
+
+    </script>
+
+
+</head>
+
+<body>
+
+</body>
+
+</html>

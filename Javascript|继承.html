@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0,minimal-ui:ios">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="">
+    <script>
+
+
+        // 变量 、函数
+        // 属性 、方法
+
+        // 扩展2： 函数的prototype是一个对象， 我们可以Object.create来根据一个对象作为原型新建一个对象
+        // 有人指出创建一个士兵的代码分散在两个地方很不优雅，于是我们用一个函数把这两部分联系起来：
+
+        // function 士兵(ID){
+        //   var 临时对象 = {};
+        //   临时对象.__proto__ = 士兵.原型;
+        //   临时对象.ID = ID;
+        //   临时对象.生命值 = 42;
+
+        //   return 临时对象;
+        // }
+
+
+        // Object.create()
+        // var f = function() { }
+        // f.prototype = Car
+        // return new f()
+
+
+        console.log("对象继承 - 例子1：");
+
+        var Human = function (name, gender) {
+            this.name = name;
+        }
+
+        Human.prototype.walk = function () { console.log(this.name + " walk") };
+
+
+        var Student = function (name,  classNo) {
+            this.name = name;
+            this.classNo = classNo
+        }
+
+        Student.prototype.walk = function () { console.log(this.name + " walk") };
+        Student.prototype.goToSchool = function () { console.log(this.name + " go to school class " + this.classNo) };
+
+        var studentA = new Student('studentA', 'classA')
+        studentA.walk();
+        studentA.goToSchool();
+
+
+        console.log("对象继承 - 例子1 end");
+        // 构造函数的原型属性，通过该构造函数产生的对象可以使用的方法
+
+        var Student = function (name, classNo) {
+            // this.name = name;
+            this.classNo = classNo
+            Human.call(this, name)
+        }
+
+        // student.__proto__ = Human.prototype
+        // student.prototype.walk = function () { console.log(this.name + " walk") };
+        // console.log(Student.prototype.__proto__)
+        // console.log(Student.prototype)
+        Student.prototype = Object.create(Human.prototype)
+        Student.prototype.goToSchool = function () { console.log(this.name + " go to school" + this.classNo) };
+        Student.prototype.constructor = Student
+
+        console.log(Student.prototype.__proto__)
+        console.log(Student.prototype)
+        // Object.setPrototypeOf(Student, Human.prototype)
+        var studentB = new Student('studentB', 'classB')
+
+
+
+        // console.log(Student.prototype.__proto__)
+        // console.log(Student.prototype)
+        studentB.walk();
+        studentB.goToSchool();
+
+
+        // Human.prototype.run = function () { console.log(this.name + " run") };
+        // studentA.run()
+
+
+        // xiaog.prototype = 
+
+        // xiaog.run = function () {
+        //     console.log(this.name + " run," + this.friends)
+        // }
+        // xiaog.friends = ['a', 'b', 'c']
+
+        // var studentA = Object.create(xiaog)
+
+        // studentA.name = studentA.name + "studentA"
+        // studentA.friends = studentA.friends.push('d')
+        // var orun = studentA.run
+        // studentA.run = function () {
+        //     orun.call(this)
+        //     console.log(this.name + ' student' + " run " + this.friends)
+        // }
+
+
+
+        // console.log("studentA.run == xiaog.run?: ", xiaog.run == studentA.run);
+
+        // xiaog.walk();
+        // xiaog.run();
+        // studentA.walk();
+        // studentA.run();
+
+        // console.log("xiaog: ", studentA.__proto__); 
+        // console.log("studentA.__proto__: ", studentA.__proto__);
+
+        console.log("== 例子6 end ==");
+
+
+// 参考 ： 
+// https://www.cnblogs.com/libinfs/archive/2017/11/23/7885337.html
+// https://www.cnblogs.com/BluceLee/p/10360885.html
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

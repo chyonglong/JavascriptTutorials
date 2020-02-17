@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0,minimal-ui:ios">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="">
+    <script>
+
+var text = "cat, bat, sat, fat";
+result = text.replace(/(.at)/g, "word ($1)");
+alert(result);    //word (cat), word (bat), word (sat), word (fat)
+
+
+
+function htmlEscape(text){
+return text.replace(/[<>"&]/g, function(match, pos, originalText){
+            switch(match){
+                case "<":
+                    return "&lt;";
+                case ">":
+                    return "&gt;";
+                case "&":
+                    return "&amp;";
+                case "\"":
+} });
+}
+return "&quot;";
+alert(htmlEscape("<p class=\"greeting\">Hello world!</p>")); //&lt;p class=&quot;greeting&quot;&gt;Hello world!&lt;/p&gt;
+
+
+
+// 参考 ： 
+// https://www.runoob.com/js/js-regexp.html
+// https://www.runoob.com/jsref/jsref-obj-regexp.html
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

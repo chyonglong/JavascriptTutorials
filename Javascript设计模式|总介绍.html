@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0,minimal-ui:ios">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="">
+    <script>
+
+        window.onload = function () {
+            // var myImage = (function () {
+            //     var imgNode = document.createElement('img'); document.body.appendChild(imgNode);
+            //     return {
+            //         setSrc: function (src) {
+            //             imgNode.src = src;
+            //         }
+            //     }
+            // })();
+            // myImage.setSrc('https://roadmap.sh/roadmaps/frontend.png');
+
+
+            var myImage = (function () {
+                var imgNode = document.createElement('img'); 
+                document.body.appendChild(imgNode);
+                return {
+                    setSrc: function (src) {
+                        imgNode.src = src;
+                        imgNode.alt = "错误";
+                    }
+                }
+            })();
+            var proxyImage = (function () {
+                var img = new Image; 
+                
+                var timerImg
+
+                img.onload = function () {
+                    myImage.setSrc(this.src);
+                    clearTimeout(timerImg)
+                }
+
+                return {
+                    setSrc: function (src) {
+                        myImage.setSrc('loading.gif');
+                        // timerImg = setTimeout(() => {
+                        //     myImage.setSrc('');
+                        // },20000)
+                        img.src = src;
+                    }
+                }
+            })();
+            proxyImage.setSrc('https://dss1.bdstatic.com/5aAHeD3nKgcUp2HgoI7O1ygwehsv/media/ch1/jpg/%E4%B8%93%E5%AE%B6%E7%BB%84%E9%80%9A%E6%A0%8F%E5%8D%A1%E7%AA%84%E5%B1%8F-0.jpg');
+        }
+
+
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

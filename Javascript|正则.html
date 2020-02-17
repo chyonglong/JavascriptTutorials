@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0,minimal-ui:ios">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="">
+    <script>
+
+        var str = 'ee123ad32def1aa0'
+
+        // 如果我要找到所有的数字， 怎么做？
+
+        var printLog = function (orginalStr, patt, str) {
+            // debugger
+            document.write(orginalStr, '    ----   ', patt.toString(), " -> ", str, '<br>');
+        }
+
+        var patt = /1/
+
+        printLog(str, patt, str.match(patt))
+
+        var patt = /4/
+
+        printLog(str, patt, str.match(patt))
+
+        var patt2 = /1/g
+
+        var str2a = str.match(patt2)
+
+        printLog(str, patt2, str2a)
+
+
+        // 转义字符
+
+        var patt3 = /\d/g
+
+        var str3a = str.match(patt3)
+
+        printLog(str, patt3, str3a)
+
+
+        // 量词
+        var patt4 = /\d\d/g
+
+        var str4a = str.match(patt4)
+
+        printLog(str, patt4, str4a)
+
+
+        var patt5 = /\d{3}/g
+
+        var str5a = str.match(patt5)
+
+        printLog(str, patt5, str5a)
+
+        var patt6 = /\d{1,9}/g
+
+        var str6a = str.match(patt6)
+
+        printLog(str, patt6, str6a)
+
+        var patt = /\d{1,}/g
+
+        printLog(str, patt, str.match(patt))
+        var patt = /\d+/g
+
+        printLog(str, patt, str.match(patt))
+
+        var patt = /\d*/g
+
+        printLog(str, patt, str.match(patt))
+
+        // 范围
+        var patt = /[1-9]+/g
+
+        printLog(str, patt, str.match(patt))
+
+        var patt = /[12]+/g
+
+        printLog(str, patt, str.match(patt))
+
+        var patt = /(1|2)+/g
+
+        printLog(str, patt, str.match(patt))
+        var patt = /[^0-9]+/g
+
+        printLog(str, patt, str.match(patt))
+        var str2 = str.replace(patt, 'x')
+        printLog(str, patt, str2);
+
+
+        var patt = /d/g
+        document.write(patt.test(str)+'<br>')
+        var patt = /9/g
+        document.write(patt.test(str)+'<br>')
+
+        var str1 = '！xx1@aa.com'
+        var patt = /^\w+@[a-z0-9]+\.[a-z]+$/i
+        document.write(patt.test(str1)+'<br>')
+        var str1 = 'xx1@aa.com!'
+        var patt = /^\w+@[a-z0-9]+\.[a-z]+$/i
+        document.write(patt.test(str1)+'<br>')
+        var str1 = 'xx1aa.com!'
+        var patt = /^\w+@[a-z0-9]+\.[a-z]+$/i
+        document.write(patt.test(str1)+'<br>')
+        var str1 = 'xx1@aacom!'
+        var patt = /^\w+@[a-z0-9]+\.[a-z]+$/i
+        document.write(patt.test(str1)+'<br>')
+        var str1 = 'xx1aacom!'
+        var patt = /^\w+@[a-z0-9]+\.[a-z]+$/i
+        document.write(patt.test(str1)+'<br>')
+        var str1 = 'xx1@aa.com'
+        var patt = /^\w+@[a-z0-9]+\.[a-z]+$/i
+        document.write(patt.test(str1)+'<br>')
+
+
+// 参考 ： 
+// https://www.runoob.com/js/js-regexp.html
+// https://www.runoob.com/jsref/jsref-obj-regexp.html
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0,minimal-ui:ios">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="">
+    <script>
+
+        var a1 = 0;   // 变量对象
+        var a2 = 'this is string'; // 变量对象
+        var a3 = null; // 变量对象
+
+        var b = { m: 20 }; // 变量b存在于变量对象中，{m: 20} 作为对象存在于堆内存中
+        var c = [1, 2, 3]; // 变量c存在于变量对象中，[1, 2, 3] 作为对象存在于堆内存中
+        (function () {
+            var fun = 1;
+
+            debugger;
+            console.log(fun, b)
+            var b;
+            function fun() {
+
+
+            }
+            function fun1(p1) {
+                var p1
+                function p1(){}
+                console.log(p1)
+            };
+            var fun;
+            fun1(1)
+        })()
+
+
+        // let obj = {
+        //     a: 1,
+        //     b: 2,
+        //     f1: function () {
+        //         var a =3 
+        //         return function () {
+        //             console.log(a)
+        //         }
+
+        //     }
+        // }
+
+        // obj.f1()();
+        // var fn;
+        // var m = 20;
+        // function foo() {
+        //     var a = 2;
+        //     var b = 2;
+        //     function baz(a) {
+        //         console.log(a);
+        //         console.log(b);
+        //     }
+        //     fn = baz;
+        // }
+        // // function bar() {
+        // //     fn(m);
+        // // }
+
+        // foo();
+        // fn();
+
+        //         在函数内部创建新的函数；
+        // 新的函数在执行时，访问了函数的变量对象；
+
+        function foo3() {
+            var a = 3;
+            var b = 4;
+
+            console.log(a);
+            function foo4() {
+                var a = 4;
+                var c = 5;
+
+                console.log(a, b);
+                function foo5() {
+                    debugger
+                    var a = 5;
+                    console.log(a, b, c);
+                }
+                function foo6() {
+                    var a = 5;
+                    console.log(a, b, c);
+                }
+                foo5()
+            }
+            foo4()
+        }
+
+        foo3();
+
+        // var fn = null;
+        // function foo() {
+        //     var a = 2;
+        //     function innnerFoo() {
+        //         // debugger
+        //         console.log(a);
+        //     }
+        //     fn = innnerFoo; // 将 innnerFoo的引用，赋值给全局变量中的fn
+        // }
+
+        // function bar() {
+        //     fn(); // 此处的保留的innerFoo的引用
+        // }
+
+        // foo();
+        // bar(); // 2
+
+
+
+        // function foo1() {
+        //     var a = 2;
+        //     function innnerFoo() {
+        //         console.log(a);
+        //         a = a + 1
+        //         function innnerFoo1() {
+        //             console.log(a);
+        //         }
+        //         innnerFoo1()
+        //     }
+        //     return innnerFoo; // 将 innnerFoo的引用，赋值给全局变量中的fn
+        // }
+
+
+        // let foo2 = foo1();
+        // foo2(); // 2
+
+
+        // (function () {
+        //     var a = 10;
+        //     var b = 20;
+
+        //     function add(num1, num2) {
+        //         debugger
+        //         var num1 = !!num1 ? num1 : a;
+        //         var num2 = !!num2 ? num2 : b;
+
+        //         return num1 + num2;
+        //     }
+
+        //     window.add = add;
+        // })();
+
+        // add(10, 20);
+
+
+//https://segmentfault.com/a/1190000012646221
+
+
+
+    </script>
+
+</head>
+
+<body>
+
+</body>
+
+</html>

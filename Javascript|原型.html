@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0,minimal-ui:ios">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="">
+    <script>
+
+
+        // 变量 、函数
+        // 属性 、方法
+
+        console.log("对象 - 例子1：");
+
+        var xiaoa = { name: "xiaoa", walk: function () { console.log(this.name + " walk") } };
+        var xiaob = { name: "xiaob", walk: function () { console.log(this.name + "walk") } };
+
+        xiaoa.walk();
+        xiaob.walk();
+
+        console.log("xiaoa.walk == xiaob.walk?: ", xiaoa.walk == xiaob.walk);
+        // false
+
+
+
+
+        console.log("== 例子1 end ==");
+
+
+        console.log("对象 - 例子2：");
+        var createObject = function (name) {
+            var obj = {};
+            obj.name = name;
+            obj.walk = function () { console.log(this.name + " walk") };
+            return obj;
+        }
+
+        var xiaoc = createObject('xiaoc')
+        var xiaod = createObject('xiaod')
+
+        xiaoc.walk();
+        xiaod.walk();
+
+        console.log("xiaoc.walk == xiaod.walk?: ", xiaoc.walk == xiaod.walk);
+        // false
+
+        console.log("== 例子2 end ==");
+
+
+        console.log("对象 - 例子3：");
+        var createObject = function (name) {
+            this.name = name;
+            this.walk = function () { console.log(this.name + " walk") };
+        }
+
+        var xiaoe = new createObject('xiaoe')
+        var xiaof = new createObject('xiaof')
+
+        xiaoe.walk();
+        xiaof.walk();
+
+        console.log("xiaoe.walk == xiaof.walk?: ", xiaoe.walk == xiaof.walk);
+        // false
+        console.log("== 例子3 end ==");
+
+       
+
+// 从例子3 中， 即使我们从创建了 两个对象 xiaoe xiaof， 它们的方法事实上还是指向了不同的地方。问题来了，如果是两个对象还好，但是我们如果创建很多人的时候， 那内存空间就会占用很多， 事实上，在这里所有的walk 方法都是一样的，我们有没有办法只用一个walk 呢？ 答案就是 原型
+        console.log("对象 - 例子4：");
+        
+        var createObject = function (name) {
+            this.name = name;
+        }
+       
+        // 声明一个构造函数 ，除了会申请保存函数的内存空间，还会额外申请一个内存空间，用于存储构造函数 A 的原型对象; 在原型对象中默认有一个 constructor 属性存储了构造函数的地址(引用)(也就是 constructor 指向了构造函数)
+        console.log("createObject.prototype.constructor == createObject ?: " , createObject.prototype.constructor == createObject ) 
+        console.log("createObject prototype: " , createObject.prototype ) 
+
+        createObject.prototype.walk = function () { console.log(this.name + " walk") };
+
+        var xiaog = new createObject('xiaog')
+        var xiaoh = new createObject('xiaoh')
+
+        xiaog.walk();
+        xiaoh.walk();
+
+        console.log("xiaog.walk == xiaoh.walk?: ", xiaog.walk == xiaoh.walk);
+         // true
+         // 所以原型的作用: 共享属性，节省内存空间。
+
+        console.log("== 例子4 end ==");
+
+
+
+        console.log("对象 - 例子5：");
+        var createObject = function (name) {
+            this.name = name;
+        }
+
+        createObject.prototype.walk = function () { console.log(this.name + " walk") };
+
+        var xiaog = new createObject('xiaog')
+        var xiaoh = new createObject('xiaoh')
+
+
+        xiaog.walk();//xiaog special walk
+        xiaoh.walk();//xiaoh walk
+
+        xiaog.walk = function () {
+            console.log(this.name + " special walk")
+        }
+
+        xiaog.walk();//xiaog walk
+        xiaoh.walk();//xiaoh walk
+        console.log("xiaog.walk == xiaoh.walk?: ", xiaog.walk == xiaoh.walk);
+        // false
+
+        // 从例子看得到，当该对象如果有 walk 方法 的时候， 它会自己调用自己的 walk; 而没有 walk 方法 的时候 ， 它才会调用 原型的 walk 方法
+
+        // 那系统怎么知道要调用 原型的 walk 方法 呢？ 
+        // 同函数中的原型(自动加了 prototype 对象)类似， 而对象在创建时候，也会自动加了一个 __proto__ 属性，用于指向它的原型
+
+        console.log("createObject.prototype == xiaog.__proto__: ", createObject.prototype == xiaog.__proto__);
+        // true
+
+        // 所以我们用 call 方法调用， 可以返回原型的 walk 方法， 当然实际工作中几乎不直接调用 __proto__ 的
+        xiaog.__proto__.walk.call(xiaog); //xiaog walk
+
+        console.log("xiaog.prototype.walk == xiaoh.walk?: ", xiaog.__proto__.walk == xiaoh.walk);
+        // true
+
+        //既然 对象在创建时候，也会自动加了一个 __proto__ 属性，用于指向它的原型, 同理的， 函数的 prototype 是一个对象， 所以它也有 __proto__ 属性
+
+        // 在这里createObject.prototype 的 __proto__ 是 Object.prototype
+        
+        console.log("createObject.prototype.__proto__ == Object.prototype?: ", createObject.prototype.__proto__ == Object.prototype);
+        // true
+
+
+        // 所以可以看得到 xiaog 的  __proto__ 是 createObject.prototype ; createObject.prototype 的 __proto__ 是 Object.prototype ; Object.prototype.__proto__的值为 null 。这样会形成由 __proto__ 将对象和原型连起来的链条。这就是原型链
+
+
+        console.log("== 例子5 end ==");
+
+// 扩展1： 当我们用 变量 赋值 var arr = new Array(), 时， 其实我们用到了的函数，譬如 join, concat,find …… 事实上都是 Array.prototype 对象的函数，而如果调用 isPrototypeOf， 就是 Array.prototype.__proto__ Object.prototype 的 函数。 同理其他 内置对象 如 String Function, Nubmer Boolean …… 也一样
+
+// 扩展2： 函数的prototype是一个对象， 我们可以Object.create来根据一个对象作为原型新建一个对象
+
+console.log("对象 - 例子6：");
+        
+        var createObject = function (name) {
+            this.name = name;
+        }
+       
+        createObject.prototype.walk = function () { console.log(this.name + " walk") };
+
+        var xiaog = new createObject('xiaog')
+
+
+        xiaog.run = function(){
+            console.log(this.name + " run")
+        }
+       
+        var studentA = Object.create(xiaog)
+
+        studentA.walk();
+        studentA.run();
+
+        // console.log("xiaog: ", studentA.__proto__); 
+        console.log("studentA.__proto__: ", studentA.__proto__); 
+
+        console.log("== 例子6 end ==");
+
+
+// 参考 ： https://segmentfault.com/a/1190000018456537
+
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
